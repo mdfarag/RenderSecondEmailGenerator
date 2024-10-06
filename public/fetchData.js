@@ -13,8 +13,10 @@ const fetchProducts = async (list) => {
     if (navigator.onLine) {
         console.log("yes connected")
         console.log("api URL form fetch before fetch is: ", apiUrl)
+        var finalApi = apiUrl + '/products'
         try {
-            const sent = await fetch(apiUrl + '/products', {
+            console.log("fetchinf from final api:", finalApi)
+            const sent = await fetch(finalApi, {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json'
@@ -24,7 +26,7 @@ const fetchProducts = async (list) => {
 
             // need to check if respose is ok or not
             // need to handle errors while fetching data coz fetch API doesnot thorow any erros
-            console.log("api URL form fetch after fetch is: ", apiUrl)
+            console.log("final api URL form fetch after fetch is: ", finalApi)
 
             // retreive products info from API endpoint 
             // console.log("sent is: ", sent)
