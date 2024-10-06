@@ -30,18 +30,20 @@ app.listen(port, () => {
 // receive post body data from index.html in the public folder
 // app.use(express.json({ extended: true, limit: '1mb' }));
 
-app.use((req, res, next) => {
-    const protocol = req.get('X-Forwarded-Proto') || req.protocol;
-    const baseUrl = `${protocol}://${req.get('host')}`;
-    // req.baseUrl = baseUrl;
-    req.originalUrl = baseUrl;
-    console.log("Base URL:", baseUrl);
-    next();
-});
+// app.use((req, res, next) => {
+//     const protocol = req.get('X-Forwarded-Proto') || req.protocol;
+//     const baseUrl = `${protocol}://${req.get('host')}`;
+//     // req.baseUrl = baseUrl;
+//     req.originalUrl = baseUrl;
+//     console.log("Base URL:", baseUrl);
+//     next();
+// });
 
 
 app.get('/', (req, res) => {
-    const apiOriginalUrl = req.originalUrl;
+    const protocol = req.get('X-Forwarded-Proto') || req.protocol;
+    const baseUrl = `${protocol}://${req.get('host')}`;
+    const apiOriginalUrl = baseUrl;
     res.render('index', { apiOriginalUrl })
 });
 
